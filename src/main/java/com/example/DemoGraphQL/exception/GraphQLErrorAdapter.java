@@ -1,5 +1,6 @@
 package com.example.DemoGraphQL.exception;
 
+import graphql.ErrorClassification;
 import graphql.ErrorType;
 import graphql.ExceptionWhileDataFetching;
 import graphql.GraphQLError;
@@ -27,7 +28,7 @@ public class GraphQLErrorAdapter implements GraphQLError {
     }
 
     @Override
-    public ErrorType getErrorType() {
+    public ErrorClassification getErrorType() {
         return error.getErrorType();
     }
 

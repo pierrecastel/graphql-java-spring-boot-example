@@ -1,11 +1,13 @@
 package com.example.DemoGraphQL.resolver;
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import java.util.Optional;
+
 import com.example.DemoGraphQL.exception.BookNotFoundException;
 import com.example.DemoGraphQL.model.Author;
 import com.example.DemoGraphQL.model.Book;
 import com.example.DemoGraphQL.repository.AuthorRepository;
 import com.example.DemoGraphQL.repository.BookRepository;
+import graphql.kickstart.tools.GraphQLMutationResolver;
 
 public class Mutation implements GraphQLMutationResolver {
     private BookRepository bookRepository;
@@ -39,15 +41,14 @@ public class Mutation implements GraphQLMutationResolver {
     }
 
     public boolean deleteBook(Long id) {
-        bookRepository.delete(id);
+        bookRepository.deleteById(id);
         return true;
     }
 
     public Book updateBookPageCount(Integer pageCount, Long id) {
-        Book book = bookRepository.findOne(id);
-        if(book == null) {
-            throw new BookNotFoundException("The book to be updated was found", id);
-        }
+        Book book = bookRepository.findById(id) //
+            .orElseThrow(() -> new BookNotFoundException("The book to be updated was found", id));
+
         book.setPageCount(pageCount);
 
         bookRepository.save(book);

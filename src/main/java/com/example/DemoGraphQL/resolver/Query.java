@@ -1,10 +1,10 @@
 package com.example.DemoGraphQL.resolver;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.example.DemoGraphQL.model.Author;
 import com.example.DemoGraphQL.model.Book;
 import com.example.DemoGraphQL.repository.AuthorRepository;
 import com.example.DemoGraphQL.repository.BookRepository;
+import graphql.kickstart.tools.GraphQLQueryResolver;
 
 public class Query implements GraphQLQueryResolver {
     private BookRepository bookRepository;
